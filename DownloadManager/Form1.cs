@@ -16,5 +16,14 @@ namespace DownloadManager
         {
             InitializeComponent();
         }
+
+        private void addURLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogURL dlg = new DialogURL();
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                Console.WriteLine("URL Recieved");
+            }
+        }
     }
 }
