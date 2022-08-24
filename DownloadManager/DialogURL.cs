@@ -16,5 +16,17 @@ namespace DownloadManager
         {
             InitializeComponent();
         }
+
+        public String WebURL
+        {
+            set
+            {
+
+            }
+            get
+            {
+                return this.textBox1.Text;
+            }
+        }
     }
 }
