@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SaveFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SaveFile.Designer.cs">
+      <DependentUpon>SaveFile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Manager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,6 +68,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="DialogURL.resx">
       <DependentUpon>DialogURL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SaveFile.resx">
+      <DependentUpon>SaveFile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Manager.resx">
       <DependentUpon>Manager.cs</DependentUpon>

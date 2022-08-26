@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net;
 
 namespace DownloadManager
 {
@@ -19,17 +20,18 @@ namespace DownloadManager
 
         private void addURLToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            string strUrl = "";
             DialogURL dlg = new DialogURL();
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    string strUrl = dlg.WebURL;
+                    strUrl = dlg.WebURL;
                     ListViewItem item = new ListViewItem(strUrl);
 
-                    System.Net.WebRequest req = System.Net.WebRequest.Create(strUrl);
+                    WebRequest req = WebRequest.Create(strUrl);
                     req.Method = "HEAD";
-                    using (System.Net.WebResponse resp = req.GetResponse())
+                    using (WebResponse resp = req.GetResponse())
                     {
                         var fileSize = resp.Headers.Get("Content-Length");
                         var fileSizeInMegaByte = Math.Round((Convert.ToDouble(fileSize) * .000001), 2);
@@ -41,6 +43,26 @@ namespace DownloadManager
                 catch
                 {
 
+                }
+            }
+
+            SaveFile saveFile = new SaveFile(strUrl);
+            Console.WriteLine("Check");
+            if (saveFile.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    string path = @saveFile.path;
+
+                    using (WebClient wc = new WebClient())
+                    {
+                        Console.WriteLine(path);
+                        wc.DownloadFile(strUrl, path);
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("fail");
                 }
             }
         }
